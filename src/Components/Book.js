@@ -1,15 +1,11 @@
 import React, {Component} from 'react'
-import {PropTypes} from 'prop-types'
+
 
 class Book extends Component {
 
-  static propTypes = {
-    book: PropTypes.object.isRequired,
-    onUpdate: PropTypes.func.isRequired
-  }
 
-  change_bookShelf = (e) => {
-    this.props.onUpdate(e.target.value)
+  handleChange = event => {
+    this.props.onUpdate(event.target.value)
   }
 
   render() {
@@ -24,7 +20,7 @@ class Book extends Component {
               backgroundImage: `url("${book.imageLinks.thumbnail}")`
             }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.change_bookShelf} value={book.shelf}>
+              <select onChange={this.handleChange} value={book.shelf}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Book from './Book'
-import {PropTypes} from 'prop-types'
+import {debounce} from 'throttle-debounce';
 import * as BooksAPI from '../Utils/BooksAPI'
 
 class BookSearch extends Component {
@@ -10,41 +10,19 @@ class BookSearch extends Component {
     query: ''
   }
 
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    myBooks: PropTypes.array.isRequired
-  }
 
   handleChange = (event) => {
     var value = event.target.value
-    this.setState(() => {
-      return {query: value}
-    })
+    this.setState(() => ({query: value}));
     this.search_books(value)
   }
 
-  changeBookShelf = (books) => {
-    let all_Books = this.props.myBooks
-    for (let book of books) {
-      book.shelf = "none"
-    }
 
-    for (let book of books) {
-      for (let b of all_Books) {
-        if (b.id === book.id) {
-          book.shelf = b.shelf
-        }
-      }
-    }
-    return books
-  }
-
-  search_books = (val) => {
+  search_books = debounce(1000, false,  (val) => {
     if (val.length !== 0) {
       BooksAPI.search(val, 10).then((books) => {
         if (books.length > 0) {
           books = books.filter((book) => (book.imageLinks))
-          books = this.changeBookShelf(books)
           this.setState(() => {
             return {Books: books}
           })
@@ -53,7 +31,7 @@ class BookSearch extends Component {
     } else {
       this.setState({Books: [], query: ''})
     }
-  }
+  })
 
   add_book = (book, shelf) => {
     this.props.onChange(book, shelf)
