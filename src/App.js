@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Route} from 'react-router-dom'
-import * as BooksAPI from './Utils/BooksAPI'
-import ListBook from './Components/List_Book'
-import BookSearch from './Components/Book_Search'
+import * as BooksAPI from './BooksAPI'
+import ListBook from './List_Book'
+import BookSearch from './Book_Search'
 import './App.css'
 
 const shelves = [

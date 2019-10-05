@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Book from './Book'
 import {debounce} from 'throttle-debounce';
-import * as BooksAPI from '../Utils/BooksAPI'
+import * as BooksAPI from './BooksAPI'
 
 class BookSearch extends Component {
   state = {
