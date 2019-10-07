@@ -10,6 +10,7 @@ class BookSearch extends Component {
     query: ''
   }
 
+  // const {myBooks} = this.props;
 
   handleChange = (event) => {
     var value = event.target.value
@@ -23,6 +24,19 @@ class BookSearch extends Component {
       BooksAPI.search(val, 10).then((books) => {
         if (books.length > 0) {
           books = books.filter((book) => (book.imageLinks))
+          books = books.map(book => {
+            for (let b of this.props.myBooks){
+              if (b.id === book.id) {
+                book.shelf = b.shelf;
+                return book;
+              }
+              else {
+                book.shelf = 'none';
+                return book;
+              }
+            }
+          })
+
           this.setState(() => {
             return {Books: books}
           })

@@ -49,8 +49,8 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={() => (<ListBook books={this.state.books} shelves={shelves} onChange={this.update_books}/>)}/>
-        <Route exact path="/search" render={({history}) => (<BookSearch onChange={this.update_books} myBooks={this.state.books}/>)}/>
+        <Route exact path="/" render={() => (<ListBook books={this.state.books} shelves={shelves} key='homePage' onChange={this.update_books}/>)}/>
+        <Route exact path="/search" render={({history}) => (<BookSearch onChange={this.update_books} key='searchPage' myBooks={this.state.books}/>)}/>
       </div>
     )
   }

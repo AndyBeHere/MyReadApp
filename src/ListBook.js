@@ -15,7 +15,7 @@ class ListBook extends Component {
         </div>
         <div className="list-books-content">
           <div>
-              {shelves.map(shelf => (<BookShelf books={books.filter((book) => (book.shelf === shelf.key))} key={shelf.key} title={shelf.name} onChangeShelf={onChange}/>))}
+              {shelves.map(shelf => (<BookShelf books={books.filter((book,index) => (book.shelf === shelf.key))} key={shelf.key} title={shelf.name} onChangeShelf={onChange}/>))}
 
           </div>
         </div>
