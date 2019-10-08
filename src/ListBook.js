@@ -1,12 +1,13 @@
+import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import BookShelf from './BookShelf'
-import {Link} from 'react-router-dom'
 
 
-class ListBook extends Component {
 
-  render() {
-    const {books,shelves,onChange} = this.props
+const ListBook =(props) => {
+
+  // render() {
+    const {books,shelves,onChange} = props
 
     return (
       <div className="list-books">
@@ -24,7 +25,7 @@ class ListBook extends Component {
         </div>
       </div>
     )
-  }
+  // }
 }
 
 export default ListBook;

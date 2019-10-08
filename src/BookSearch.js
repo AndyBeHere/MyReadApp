@@ -20,25 +20,32 @@ class BookSearch extends Component {
 
 
   search_books = debounce(1000, false,  (val) => {
+
     if (val.length !== 0) {
       BooksAPI.search(val, 10).then((books) => {
-        if (books.length > 0) {
+        if (books.error) {
+          this.setState(() => {
+            return {Books: []}
+          })
+        }
+        else if (books.length > 0) {
+          const Books = this.props.myBooks;
           books = books.filter((book) => (book.imageLinks))
-          books = books.map(book => {
-            for (let b of this.props.myBooks){
-              if (b.id === book.id) {
-                book.shelf = b.shelf;
-                return book;
-              }
-              else {
-                book.shelf = 'none';
-                return book;
-              }
-            }
+          for (let index in books) {
+            books[index].shelf = 'none'
+          }
+          const updateBooks = books.map(book => {
+              Books.map(b=>{
+                if (b.id === book.id) {
+                  book.shelf=b.shelf
+                }
+                return b
+              })
+            return book
           })
 
           this.setState(() => {
-            return {Books: books}
+            return {Books: updateBooks}
           })
         }
       })
